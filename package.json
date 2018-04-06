@@ -1,0 +1,32 @@
+{
+  "name": "godot-asset-library",
+  "version": "1.0.0",
+  "description": "Godot Asset Library",
+  "repository": "https://github.com/godotengine/godot-asset-library.git",
+  "author": "Godot Engine Contributors",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.6",
+    "bulma": "^0.6.2",
+    "typeface-montserrat": "^0.0.54",
+    "typeface-roboto": "^0.0.54"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "del-cli": "^1.1.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^1.1.11",
+    "node-sass": "^4.8.3",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.14"
+  },
+  "scripts": {
+    "clean": "del-cli public",
+    "dev": "webpack --watch --mode development",
+    "prod": "webpack --mode production"
+  }
+}

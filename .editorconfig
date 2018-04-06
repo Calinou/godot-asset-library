@@ -8,12 +8,17 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 charset = utf-8
 
-# CSS
-[*.css]
+# CSS/SCSS
+[*.{css,scss}]
 indent_style = space
 indent_size = 4
 
-# PHP
-[*.{php,phtml}]
+# JavaScript
+[*.{js}]
+indent_style = space
+indent_size = 4
+
+# PHP/Twig
+[*.{php,twig}]
 indent_style = space
 indent_size = 4

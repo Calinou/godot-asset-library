@@ -4,9 +4,10 @@ return [
         'determineRouteBeforeAppMiddleware' => true,
         'displayErrorDetails' => true, // set to false in production
 
-        // Renderer settings
-        'renderer' => [
+        // Template renderer settings
+        'view' => [
             'template_path' => __DIR__ . '/../templates/',
+            'cache_path' => false, // Set to 'cache' in production
         ],
 
         // Monolog settings

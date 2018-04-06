@@ -1,0 +1,21 @@
+// Main style file (will be compiled to `style.css`)
+
+// Import Bulma (with customizations)
+@import "~bulma/sass/utilities/initial-variables";
+@import "bulma-variables";
+@import "~bulma/bulma";
+
+// Import Font Awesome
+$fa-font-path: "~@fortawesome/fontawesome-free-webfonts/webfonts";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid";
+
+// Title font
+@import "~typeface-montserrat/index.css";
+// General font
+@import "~typeface-roboto/index.css";
+
+// Import our styles
+@import "base";
+@import "assets";
+@import "footer";

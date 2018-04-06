@@ -100,7 +100,6 @@ if (FRONTEND) {
                 $params = [
                     'data' => $result,
                     'basepath' => $request->getUri()->getBasePath(). '',
-                    'bowerpath' => $request->getUri()->getBasePath() . '/bower_components',
                     'path' => $path,
                     'params' => $request->getQueryParams(),
                     'query' => $request->getUri()->getQuery(),
@@ -139,7 +138,7 @@ if (FRONTEND) {
                     }
                 }
 
-                $response = $this->renderer->render($response, $template_names[$queryUri] . '.phtml', $params);
+                $response = $this->view->render($response, $template_names[$queryUri] . '.twig', $params);
             }
         }
 

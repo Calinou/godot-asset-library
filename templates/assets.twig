@@ -1,0 +1,88 @@
+{% include 'includes/header.twig' %}
+<div class="container">
+    <form method="get" action="{{ base_url() }}/asset">
+        <section class="columns">
+            <div class="column is-half">
+                <div class="field has-addons">
+                    <div class="control">
+                        <div class="select">
+                            <select>
+                                <option selected>Any</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Search assets">
+                    </div>
+                    <div class="control">
+                        <a class="button is-info" href="{{ base_url() }}/asset">
+                            Search
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-quarter">
+                <div class="field">
+                    <label class="label">Godot version</label>
+                    <div class="control">
+                        <span class="select">
+                            <select>
+                                <option selected>Any</option>
+                                {% for version in constants.common_godot_versions %}
+                                    <option value="{{ version }}">{{ version }}</option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-quarter">
+                <div class="field">
+                    <label class="label">Sort</label>
+                    <div class="control">
+                        <span class="select">
+                            <select>
+                                {% set sort_modes = ['updated', 'name', 'rating'] %}
+                                {% for sort in sort_modes %}
+                                    <option value="{{ sort }}">{{ sort | capitalize }}</option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
+    <section class="columns is-multiline">
+        {% for asset in data.result %}
+        <article class="column is-half column-asset">
+            <div class="card card-asset">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64">
+                                <img src="{{ asset.icon_url }}" alt="">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <p class="title is-4">{{ asset.title }}</p>
+                            <p class="subtitle is-6 has-text-grey">Submitted by {{ asset.author }} – Updated on {{ asset.modify_date }}</p>
+                            <div class="tags">
+                                <span class="tag is-info">{{ asset.category }}</span>
+                                <span class="tag is-dark">{{ asset.godot_version }}</span>
+                                <span class="tag is-warning">{{ asset.support_level }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+    {% include 'includes/pagination.twig' %}
+</div>
+{% include 'includes/footer.twig' %}

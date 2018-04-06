@@ -1,0 +1,38 @@
+// Base styles
+
+// The speed of all transitions
+$transition-speed: 0.05s;
+
+a,
+.navbar-burger {
+    transition:
+            $transition-speed background-color,
+            $transition-speed color;
+}
+
+.navbar {
+    box-shadow: 0 0 0.25rem hsla(0, 0%, 0%, 0.2);
+}
+
+.navbar-brand {
+    font-weight: 700;
+}
+
+a.navbar-item:active {
+    background-color: $navbar-item-active-background-color;
+    color: $navbar-item-active-color;
+}
+
+.navbar-burger {
+    color: $navbar-item-color;
+
+    &:hover {
+        background-color: $navbar-item-hover-background-color;
+        color: $navbar-item-hover-color;
+    }
+
+    &:active {
+        background-color: $navbar-item-active-background-color;
+        color: $navbar-item-active-color;
+    }
+}

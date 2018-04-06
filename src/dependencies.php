@@ -2,16 +2,24 @@
 // DIC configuration
 
 $container = $app->getContainer();
+$development = $_SERVER['REMOTE_ADDR'] === '127.0.0.1' ? true : false;
 
-// view renderer
-$container['renderer'] = function ($c) {
-    $settings = $c->get('settings')['renderer'];
-    return new Slim\Views\PhpRenderer($settings['template_path']);
+// view renderer (Twig templates)
+$container['view'] = function ($container) {
+    $settings = $container->get('settings')['view'];
+    $view = new \Slim\Views\Twig($settings['template_path'], [
+        'debug' => true, // TODO: Remove in production
+        'cache' => $settings['cache_path'],
+    ]);
+    $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
+    $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
+    $view->addExtension(new \Twig_Extension_Debug()); // TODO: Remove in production
+    return $view;
 };
 
 // monolog
-$container['logger'] = function ($c) {
-    $settings = $c->get('settings')['logger'];
+$container['logger'] = function ($container) {
+    $settings = $container->get('settings')['logger'];
     $logger = new Monolog\Logger($settings['name']);
     $logger->pushProcessor(new Monolog\Processor\UidProcessor());
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], Monolog\Logger::DEBUG));
@@ -19,21 +27,21 @@ $container['logger'] = function ($c) {
 };
 
 // pdo
-$container['db'] = function ($c) {
-    $settings = $c->get('settings')['db'];
+$container['db'] = function ($container) {
+    $settings = $container->get('settings')['db'];
     $db = new PDO($settings['dsn'], $settings['user'], $settings['pass']);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $db;
 };
 
 // constants
-$container['constants'] = function ($c) {
+$container['constants'] = function ($container) {
     return require_once __DIR__ . '/constants.php';
 };
 
 // queries
-$container['queries'] = function ($c) {
-    $db = $c->db;
+$container['queries'] = function ($container) {
+    $db = $container->db;
 
     $raw_queries = require_once __DIR__ . '/queries.php';
     $queries = [];
@@ -47,9 +55,9 @@ $container['queries'] = function ($c) {
 };
 
 // mail
-$container['mail'] = function ($c) {
-    return function () use ($c) {
-        $settings = $c->get('settings')['mail'];
+$container['mail'] = function ($container) {
+    return function () use ($container) {
+        $settings = $container->get('settings')['mail'];
         $mail = new PHPMailer;
         $mail->setFrom($settings['from']);
         if (isset($settings['replyTo'])) {
@@ -75,14 +83,14 @@ $container['mail'] = function ($c) {
 };
 
 // csrf guard
-$container['csrf'] = function ($c) {
+$container['csrf'] = function ($container) {
     session_name('assetlib-csrf');
     session_start();
     return new \Slim\Csrf\Guard;
 };
 
 // cookies
-$container['cookies'] = function ($c) {
+$container['cookies'] = function ($container) {
     return [
         'cookie' => function ($name, $value) {
             return Dflydev\FigCookies\Cookie::create($name, $value);
@@ -96,13 +104,13 @@ $container['cookies'] = function ($c) {
 };
 
 // tokens
-$container['tokens'] = function ($c) {
-    return new Godot\AssetLibrary\Helpers\Tokens($c);
+$container['tokens'] = function ($container) {
+    return new Godot\AssetLibrary\Helpers\Tokens($container);
 };
 
 // utils
-$container['utils'] = function ($c) {
-    return new Godot\AssetLibrary\Helpers\Utils($c);
+$container['utils'] = function ($container) {
+    return new Godot\AssetLibrary\Helpers\Utils($container);
 };
 
 // controllers

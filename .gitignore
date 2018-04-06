@@ -1,5 +1,14 @@
+# Composer
 vendor/**
-logs/**/*.log
+
+# npm
+node_modules/
+
+# Compiled assets (Webpack bundles)
+public/
+
+# Private configuration (such as database credentials)
 src/settings-local.php
 
-**/bower_components/**
+# Logs
+logs/**/*.log
