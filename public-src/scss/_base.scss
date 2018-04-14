@@ -3,6 +3,11 @@
 // The speed of all transitions
 $transition-speed: 0.05s;
 
+.title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
 a,
 .navbar-burger {
     transition:
@@ -35,4 +40,9 @@ a.navbar-item:active {
         background-color: $navbar-item-active-background-color;
         color: $navbar-item-active-color;
     }
+}
+
+.tags:last-child {
+    // Prevents overflow
+    margin-bottom: 0;
 }

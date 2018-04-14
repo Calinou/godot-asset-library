@@ -1,0 +1,11 @@
+// Asset details page
+
+.asset-info {
+    border-left: 0.0625rem solid $grey-lighter;
+}
+
+.asset-misc-title,
+.asset-misc-title:not(:last-child) {
+    font-weight: 600;
+    margin: 1rem 0 0.25rem 0;
+}

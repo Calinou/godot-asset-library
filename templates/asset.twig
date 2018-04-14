@@ -1,0 +1,37 @@
+{% include 'includes/header.twig' %}
+<div class="container">
+    <div class="card">
+        <div class="card-content">
+            <section class="columns">
+                <div class="column is-9">
+                    <article class="media">
+                        <div class="media-left">
+                            <figure class="image is-64x64">
+                                <img src="{{ data.icon_url }}" alt="{{ data.title }}">
+                            </figure>
+                        </div>
+                        <div class="media-content">
+                            <h1 class="title">{{ data.title }}</h1>
+                            <h2 class="subtitle has-text-grey">by {{ data.author }}</h2>
+                            <div class="tags">
+                                <span class="tag is-info">{{ data.category }}</span>
+                                <span class="tag is-dark">{{ data.godot_version }}</span>
+                                <span class="tag is-warning">{{ data.support_level }}</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="column is-3 asset-info">
+                    <h3 class="title is-5 asset-misc-title">Last update</h3>
+                    {{ data.modify_date }}
+                    <h3 class="title is-5 asset-misc-title">License</h3>
+                    {{ data.cost }}
+                </div>
+            </section>
+            <hr>
+            <p>{{ data.description }}</p>
+        </div>
+    </div>
+    {% include 'includes/pagination.twig' %}
+</div>
+{% include 'includes/footer.twig' %}
