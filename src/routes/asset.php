@@ -13,7 +13,7 @@ $app->get('/asset', function ($request, $response, $args) {
     $page_size = 20;
     $max_page_size = 500;
     $page_offset = 0;
-    $min_godot_version = 0;
+    $min_godot_version = -1;
     $max_godot_version = 9999999;
     if (FRONTEND) {
         $category_type = $this->constants['category_type']['any'];
@@ -55,7 +55,7 @@ $app->get('/asset', function ($request, $response, $args) {
     }
     if (isset($params['godot_version']) && $params['godot_version'] != '') {
         if ($params['godot_version'] == 'any') {
-            $min_godot_version = 0;
+            $min_godot_version = -1;
             $max_godot_version = 9999999;
         } else {
             $godot_version = $this->utils->getUnformattedGodotVersion($params['godot_version']);

@@ -55,18 +55,14 @@ return $constants = [
         'type', 'link', 'thumbnail',
     ],
     'special_godot_versions' => double_map([
-        0 => 'unknown',
-        9999999 => 'custom_build'
+        -1 => 'any',
     ]),
     'common_godot_versions' => [
-        '2.0',
+        'any',
         '2.1',
-        '2.2',
         '3.0',
         '3.1',
         '3.2',
         '4.0',
-        'unknown',
-        'custom_build',
     ]
 ];

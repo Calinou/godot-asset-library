@@ -90,9 +90,6 @@ class Utils
 
     public function getFormattedGodotVersion($internal_id, &$warning=null, &$light_warning=null)
     {
-        if ($internal_id == $this->c->constants['special_godot_versions']['unknown']) {
-            $light_warning[] = "Setting Godot version as \"unknown\" is not recommended, as it would prevent people from finding your asset easily.";
-        }
         if (isset($this->c->constants['special_godot_versions'][$internal_id])) {
             return $this->c->constants['special_godot_versions'][$internal_id];
         } else {
